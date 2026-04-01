@@ -115,7 +115,8 @@ void pujCGAL::Dual_Graph< _TKernel >::build_from_triangulation(
       {
         // Internal edge
         auto it = std::find( face_indices.begin(), face_indices.end(), adj_face );
-        // Get adjacent face index
+        // Get adjacent face index, only inserting once
+        // The edges in the graph have no direction
         TIndex j = std::distance( face_indices.begin(), it );
         if ( i < j )
         {
