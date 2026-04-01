@@ -160,20 +160,16 @@ triangulate(
     } // end for
 
     // Last vertex
-    if( s.size( ) > 2 )
+    while( s.size( ) > 1 )
     {
+      auto st = s.top( );
       s.pop( );
-      while( s.size( ) > 1 )
-      {
-        auto st = s.top( );
-        s.pop( );
-        auto sb = s.top( );
+      auto sb = s.top( );
 
-        T.add_triangle(
-          std::get< 1 >( *vIt ), std::get< 1 >( st ), std::get< 1 >( sb )
-          );
-      } // end while
-    } // end if
+      T.add_triangle(
+        std::get< 1 >( *vIt ), std::get< 1 >( st ), std::get< 1 >( sb )
+        );
+    } // end while
   }
   else if( M.size( ) == 3 )
     T.add_triangle( M[ 0 ], M[ 1 ], M[ 2 ] );
