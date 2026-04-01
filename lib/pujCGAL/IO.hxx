@@ -155,10 +155,10 @@ bool pujCGAL::IO::save_dual_graph( const std::string& fname, const pujCGAL::Dual
       ofs << "v "
           << p.x() << " "
           << p.y()<< " 0" << std::endl;
-
-      ofs << std::endl;
     }
 
+    ofs << std::endl;
+    
     for( const auto& edge: graph.get_edges()) 
     {
       ofs << "l "

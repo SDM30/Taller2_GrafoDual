@@ -125,8 +125,7 @@ void pujCGAL::Dual_Graph< _TKernel >::build_from_triangulation(
       }
       
       h = mesh.next( h );
-    }
-    while ( h != start );
+    } while ( h != start );
   }
   
 
