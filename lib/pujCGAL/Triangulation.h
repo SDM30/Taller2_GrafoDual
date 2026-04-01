@@ -6,6 +6,7 @@
 
 #include <array>
 #include <vector>
+#include <CGAL/Surface_mesh.h>
 
 namespace pujCGAL
 {
@@ -22,6 +23,13 @@ namespace pujCGAL
     using TPoints = std::vector< TPoint >;
     using TTriangle = std::array< TIndex, 3 >;
     using TTopology = std::vector< TTriangle >;
+
+    // Halfedge data structure types
+    using TMesh = CGAL::Surface_mesh<TPoint>;
+    using TVertex_index = typename TMesh::Vertex_index;
+    using TFace_index = typename TMesh::Face_index;
+    using THalfedge_index = typename TMesh::Halfedge_index;
+    using TEdge_index = typename TMesh::Edge_index;
 
   public:
     Triangulation( );
@@ -41,9 +49,20 @@ namespace pujCGAL
     auto topology_end( );
     auto topology_end( ) const;
 
+    // Representing the triangulation as a halfedge data structure
+    void build_surface_mesh();
+    // Wrappers for built-in functions
+    THalfedge_index opposite( const THalfedge_index& h ) const;
+    THalfedge_index next( const THalfedge_index& h ) const;
+    THalfedge_index prev( const THalfedge_index& h ) const;
+    TFace_index face( const THalfedge_index& h ) const;
+    TVertex_index source( const THalfedge_index& h ) const;
+    TVertex_index target( const THalfedge_index& h ) const;
+
   protected:
     TPoints   m_Points;
     TTopology m_Topology;
+    TMesh m_Mesh;
   };
 } // end namespace
 

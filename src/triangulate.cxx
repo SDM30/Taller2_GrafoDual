@@ -28,6 +28,7 @@ int main( int argc, char** argv )
   pujCGAL::triangulate( mesh, polygon );
   pujCGAL::IO::save( argv[ 2 ], mesh );
 
+  mesh.build_surface_mesh();
   return( EXIT_SUCCESS );
 }
 

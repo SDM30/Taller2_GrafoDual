@@ -109,6 +109,65 @@ topology_end( ) const
   return( this->m_Topology.end( ) );
 }
 
+template< class _TKernel >
+void pujCGAL::Triangulation< _TKernel >::build_surface_mesh() 
+{
+  m_Mesh.clear();
+  
+  std::vector<TVertex_index> vertex_descripts(m_Points.size());
+  for (TIndex i = 0; i < m_Points.size(); ++i) {
+    vertex_descripts[i] = m_Mesh.add_vertex(m_Points[i]);
+  }
+
+  for (const auto& t: m_Topology) {
+    m_Mesh.add_face(vertex_descripts[t[0]],
+                    vertex_descripts[t[1]],
+                    vertex_descripts[t[2]]);
+  }
+}
+
+template< class _TKernel >
+typename pujCGAL::Triangulation< _TKernel >::THalfedge_index
+pujCGAL::Triangulation< _TKernel >::opposite(const THalfedge_index& h) const
+{
+  return m_Mesh.opposite(h);
+}
+
+template< class _TKernel >
+typename pujCGAL::Triangulation< _TKernel >::THalfedge_index 
+pujCGAL::Triangulation< _TKernel >::next( const THalfedge_index& h ) const
+{
+  return m_Mesh.next( h );
+}
+
+template< class _TKernel >
+typename pujCGAL::Triangulation< _TKernel >::THalfedge_index 
+pujCGAL::Triangulation< _TKernel >::prev( const THalfedge_index& h ) const
+{
+  return m_Mesh.prev( h );
+}
+
+template< class _TKernel >
+typename pujCGAL::Triangulation< _TKernel >::TFace_index 
+pujCGAL::Triangulation< _TKernel >::face( const THalfedge_index& h ) const
+{
+  return m_Mesh.face( h );
+}
+
+template< class _TKernel >
+typename pujCGAL::Triangulation< _TKernel >::TVertex_index 
+pujCGAL::Triangulation< _TKernel >::source( const THalfedge_index& h ) const
+{
+  return m_Mesh.source( h );
+}
+
+template< class _TKernel >
+typename pujCGAL::Triangulation< _TKernel >::TVertex_index 
+pujCGAL::Triangulation< _TKernel >::target( const THalfedge_index& h ) const
+{
+  return m_Mesh.target( h );
+}
+
 #endif // __pujCGAL__Triangulation__hxx__
 
 // eof - Triangulation.hxx
