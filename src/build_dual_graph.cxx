@@ -9,6 +9,7 @@
 #include <pujCGAL/IO.h>
 #include <pujCGAL/Polygon.h>
 #include <pujCGAL/Triangulation.h>
+#include <pujCGAL/Dual_Graph.h>
  
 int main( int argc, char** argv )
 {
@@ -29,6 +30,32 @@ int main( int argc, char** argv )
   pujCGAL::IO::save( argv[ 2 ], mesh );
 
   mesh.build_surface_mesh();
+
+  pujCGAL::Dual_Graph< TKernel > dual_graph;
+  dual_graph.build_from_triangulation( mesh );
+
+  pujCGAL::IO::save_dual_graph(argv[3], dual_graph);
+
+  // const auto& mesh_test = mesh.get_mesh();
+  // int counter_exed = 0;
+  // for ( auto face : mesh_test.faces( ) )
+  // {
+  //   auto h = mesh_test.halfedge( face );
+  //   auto start = h;
+  //   do
+  //   {
+  //     if ( mesh.is_boundary_edge( h ) )
+  //     {
+  //       counter_exed ++;
+  //       std::cout << "Arista de frontera encontrada" << std::endl;
+  //     }
+  //     h = mesh.next( h );
+  //   }
+  //   while ( h != start );
+  // }
+  // std::cout << "contador aristas exteriores = " << counter_exed << std::endl;
+  
+
   return( EXIT_SUCCESS );
 }
 

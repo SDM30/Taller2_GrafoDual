@@ -70,6 +70,9 @@ namespace pujCGAL
     const typename _TPolygon::TTopology& M
     );
 
+  template <class _TTriangulation, class _TPolygon>
+  void build_dual_graph(const _TTriangulation &mesh, _TPolygon &polygon);
+
 } // end namespace
 
 #include <pujCGAL/Polygon.hxx>

@@ -51,6 +51,7 @@ namespace pujCGAL
 
     // Representing the triangulation as a halfedge data structure
     void build_surface_mesh();
+    const TMesh& get_mesh( ) const;
     // Wrappers for built-in functions
     THalfedge_index opposite( const THalfedge_index& h ) const;
     THalfedge_index next( const THalfedge_index& h ) const;
@@ -58,6 +59,8 @@ namespace pujCGAL
     TFace_index face( const THalfedge_index& h ) const;
     TVertex_index source( const THalfedge_index& h ) const;
     TVertex_index target( const THalfedge_index& h ) const;
+    // External edge
+    bool is_boundary_edge( const THalfedge_index& h ) const;
 
   protected:
     TPoints   m_Points;

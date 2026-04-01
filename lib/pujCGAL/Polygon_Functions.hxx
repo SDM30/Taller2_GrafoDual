@@ -10,6 +10,8 @@
 #include <vector>
 
 #include <CGAL/partition_2.h>
+#include "Polygon.h"
+#include "Triangulation.h"
 
 // -------------------------------------------------------------------------
 template< class _TTriangulation, class _TPolygon >

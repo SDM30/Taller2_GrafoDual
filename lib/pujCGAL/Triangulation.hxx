@@ -127,6 +127,13 @@ void pujCGAL::Triangulation< _TKernel >::build_surface_mesh()
 }
 
 template< class _TKernel >
+const typename pujCGAL::Triangulation< _TKernel >::TMesh& 
+pujCGAL::Triangulation< _TKernel >::get_mesh( ) const
+{
+  return m_Mesh;
+}
+
+template< class _TKernel >
 typename pujCGAL::Triangulation< _TKernel >::THalfedge_index
 pujCGAL::Triangulation< _TKernel >::opposite(const THalfedge_index& h) const
 {
@@ -166,6 +173,12 @@ typename pujCGAL::Triangulation< _TKernel >::TVertex_index
 pujCGAL::Triangulation< _TKernel >::target( const THalfedge_index& h ) const
 {
   return m_Mesh.target( h );
+}
+
+template< class _TKernel >
+bool pujCGAL::Triangulation< _TKernel >::is_boundary_edge( const THalfedge_index& h ) const
+{
+  return m_Mesh.face( m_Mesh.opposite( h ) ) == TMesh::null_face( );
 }
 
 #endif // __pujCGAL__Triangulation__hxx__

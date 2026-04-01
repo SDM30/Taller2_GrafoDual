@@ -9,6 +9,7 @@
 
 #include <pujCGAL/Polygon.h>
 #include <pujCGAL/Triangulation.h>
+#include <pujCGAL/Dual_Graph.h>
 
 // -------------------------------------------------------------------------
 template< class TKernel >
@@ -143,6 +144,36 @@ save( const std::string& fname, const pujCGAL::Triangulation< TKernel >& mesh )
     return( false );
 }
 
+
+template< class TKernel >
+bool pujCGAL::IO::save_dual_graph( const std::string& fname, const pujCGAL::Dual_Graph< TKernel >& graph) {
+  std::ofstream ofs( fname.c_str( ) );
+  if( ofs )
+  {
+    for(const auto& p: graph.get_nodes())
+    {
+      ofs << "v "
+          << p.x() << " "
+          << p.y()<< " 0" << std::endl;
+
+      ofs << std::endl;
+    }
+
+    for( const auto& edge: graph.get_edges()) 
+    {
+      ofs << "l "
+          << edge.first + 1 << " "
+          << edge.second + 1<< " " << std::endl;
+    }
+
+    ofs << std::endl;
+
+    ofs.close( );
+    return( true );
+  }
+  else
+    return( false );
+}
 
 #endif // __pujCGAL__IO__hxx__
 

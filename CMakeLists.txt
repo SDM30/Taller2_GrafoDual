@@ -16,7 +16,7 @@ include_directories(
 find_package(CGAL REQUIRED COMPONENTS Core)
 
 # -- Executables
-add_executable(pujCGAL_triangulate src/triangulate.cxx)
-target_link_libraries(pujCGAL_triangulate CGAL::CGAL)
+add_executable(pujCGAL_build_dual_graph src/build_dual_graph.cxx)
+target_link_libraries(pujCGAL_build_dual_graph CGAL::CGAL)
 
 ## eof - CMakeLists.txt
