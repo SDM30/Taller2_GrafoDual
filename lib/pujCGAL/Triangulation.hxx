@@ -42,7 +42,15 @@ template< class _TKernel >
 void pujCGAL::Triangulation< _TKernel >::
 add_triangle( const TIndex& a, const TIndex& b, const TIndex& c )
 {
-  this->m_Topology.push_back( { a, b, c } );
+  // Force consistent orientation for all triangles
+  auto orientation = CGAL::orientation(
+    this->m_Points[ a ], this->m_Points[ b ], this->m_Points[ c ]
+    );
+
+  if( orientation == CGAL::RIGHT_TURN )
+    this->m_Topology.push_back( { a, c, b } );
+  else
+    this->m_Topology.push_back( { a, b, c } );
 }
 
 // -------------------------------------------------------------------------
