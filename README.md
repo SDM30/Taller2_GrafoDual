@@ -1,3 +1,10 @@
+# Instrucciones de compilación usando ccmake
+```
+$ mkdir build && cd build
+$ ccmake ..
+$ make
+```
+
 # Instrucciones de ejecución
 Ejecutar el programa desde directorio de build:
 ```
